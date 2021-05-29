@@ -1,0 +1,48 @@
+.webdev-padding-5px {
+    padding: 15px;
+}
+
+.heading-color {
+    color: white;
+}
+
+.add-padding-right {
+    padding-right: 10px;
+}
+
+.add-padding-right-top {
+    padding-right: 10px;
+}
+
+.add-padding-tabs {
+    padding-right: 20px;
+}
+
+.add-padding-top {
+    padding-top: 20px;
+}
+
+.add-padding-bot-10px {
+    padding-bottom: 15px;
+}
+
+.add-gap-color {
+    height:30px;
+    background-color: blue;
+}
+
+.nav-bar-bottom {
+border-bottom: 0px solid hsl(0, 0%, 100%);
+}
+
+.add-header-padding-left {
+    padding-left: 20px;
+}
+
+.add-active-color {
+    background-color: Gray;
+}
+
+.add-tab-color {
+    background-color: LightGray;
+}

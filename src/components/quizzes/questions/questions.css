@@ -1,0 +1,40 @@
+.add-padding-left {
+    position: absolute;
+    padding-left: 20px;
+}
+
+.add-padding-left-tick {
+    position: absolute;
+    margin-left: 1120px;
+}
+
+.add-padding-left-tick-2 {
+    position: absolute;
+    margin-left: 1050px;
+}
+
+.add-padding-left-top {
+    position: absolute;
+    margin-left: 1150px;
+}
+
+.add-padding-left-top-2 {
+    position: absolute;
+    margin-left: 1130px;
+}
+
+.background-correct {
+    background-color: green;
+}
+
+.background-wrong {
+    background-color: #DC143C;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-green {
+    color: green
+}
