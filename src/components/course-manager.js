@@ -101,14 +101,11 @@ class CourseManager extends React.Component {
           </div>
         </div> */}
         <Route path="/courses/grid" exact={true}>
-
-          <div className="row pt-3">
-
-            <div className="col-4 d-none d-sm-none d-md-block">
-              <h4>Recent Documents</h4>
+          <div class="row" >
+            <div class="col-12 text-center" >
+              <span className="furniture-type-grid-view-header ">Furniture Type Grid View</span>
             </div>
           </div>
-
         </Route>
         <Route path="/courses/table" exact={true}>
           <CourseTable

@@ -4,37 +4,39 @@ import EditableItem from "../editable-item";
 import EditableColor from "../editable-color";
 import { useParams } from "react-router-dom";
 import lessonService from '../../services/lesson-service';
+import moduleService from "../../services/module-service"
 
-const LessonTabs = (
-    {
-        lessons = [],
-        findLessonsForModule,
-        createLessonForModule,
-        deleteLesson,
-        updateLesson
+const LessonTabs = ({
+    lessons = [],
+    myModules = [],
+    findLessonsForModule,
+    createLessonForModule,
+    deleteLesson,
+    updateLesson,
+    findModulesForCourse = (courseId) => console.log(courseId),
 
-    }) => {
+}) => {
     const { layoutId, courseId, moduleId, lessonId } = useParams();
 
-
-    const call = () => {
-        console.log(" lesson-tabs is called ......");
-    }
-
-    call();
     useEffect(() => {
-        //alert("lesson - tabs ----- Called: " + moduleId)
         if (moduleId !== "undefined" && typeof moduleId !== "undefined") {
             findLessonsForModule(moduleId)
         }
-
-        console.log(lessons);
     }, [moduleId])
     return (
         <div className="background-color-blue">
             { moduleId &&
                 <div>
-                    <h6 class="bg-danger text-white">Colors Available  for {moduleId}</h6>
+                    <h6 class="bg-info "> <span class="bg-primary text-light font-weight-bold">Colors Available for style -
+                        {
+                            myModules.map(module =>
+                                <>
+                                    {module._id === moduleId ? ' ' + module.title : ''}
+                                </>
+                            )
+                        }
+                    </span>
+                    </h6>
                     <ul className="nav nav-tabs">
                         {
                             lessons.map(lesson =>
@@ -42,8 +44,7 @@ const LessonTabs = (
                                     <EditableColor
                                         active={lesson._id === lessonId}
                                         to={`/courses/${layoutId}/editor/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
-                                        deleteItem={deleteLesson}
-                                        updateItem={updateLesson}
+
                                         item={lesson}
                                     />
                                 </li>
@@ -63,14 +64,13 @@ const LessonTabs = (
 
 const stpm = (state) => {
     return {
-        lessons: state.lessonReducer.lessons
+        lessons: state.lessonReducer.lessons,
+        myModules: state.moduleReducer.modules
     }
 }
 const dtpm = (dispatch) => {
     return {
         findLessonsForModule: (moduleId) => {
-            //console.log("LOAD LESSONS FOR MODULE:")
-            //console.log(moduleId)
             lessonService.findLessonsForModule(moduleId)
                 .then(lessons => dispatch({
                     type: "FIND_LESSONS",
@@ -99,8 +99,16 @@ const dtpm = (dispatch) => {
                     type: "DELETE_LESSON",
                     lessonToDelete: lesson
                 }))
-        }
+        },
 
+        findModulesForCourse: (courseId) => {
+            // alert(courseId);
+            moduleService.findModulesForCourse(courseId)
+                .then(theModules => dispatch({
+                    type: "FIND_MODULES_FOR_COURSE",
+                    modules: theModules
+                }))
+        }
 
     }
 }

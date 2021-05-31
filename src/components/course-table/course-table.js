@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import CourseRow from "./course-row";
 import { Link } from "react-router-dom";
+import { Tooltip } from 'reactstrap';
 
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = React.useState(config);
@@ -39,13 +40,15 @@ const useSortableData = (items, config = null) => {
 
 const CourseTable = (props) => {
   const { items, requestSort, sortConfig } = useSortableData(props.courses);
-
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
+
+  const [tooltipOpen, setTooltipOpen] = React.useState(false);
+  const toggle = () => setTooltipOpen(!tooltipOpen);
   return (
     <table className="table" >
       <thead>
@@ -81,7 +84,10 @@ const CourseTable = (props) => {
             <span className="float-right">
               <i className="fas fa-2x fa-sort add-padding-right"></i>
               <Link to="/courses/grid">
-                <i className="fas fa-2x fa-th"></i>
+                <i className="fas fa-list fa-2x" href="#" id="TooltipListView" ></i>
+                <Tooltip placement="right" isOpen={tooltipOpen} target="TooltipListView" toggle={toggle}>
+                  Go To Grid View !!
+                </Tooltip>
               </Link>
             </span>
           </th>

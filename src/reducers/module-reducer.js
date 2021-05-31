@@ -6,7 +6,7 @@ const initialState = {
     ]
 }
 
-const moduleReducer = (state=initialState, action) => {
+const moduleReducer = (state = initialState, action) => {
     switch (action.type) {
         case "FIND_MODULES_FOR_COURSE":
             return {
@@ -28,7 +28,7 @@ const moduleReducer = (state=initialState, action) => {
         case "DELETE_MODULE":
             const newState1 = {
                 modules: state.modules.filter(module => {
-                    if(module._id === action.moduleToDelete._id) {
+                    if (module._id === action.moduleToDelete._id) {
                         return false
                     } else {
                         return true
@@ -39,7 +39,7 @@ const moduleReducer = (state=initialState, action) => {
         case "UPDATE_MODULE":
             return {
                 modules: state.modules.map(m => {
-                    if(m._id === action.module._id) {
+                    if (m._id === action.module._id) {
                         return action.module
                     } else {
                         return m

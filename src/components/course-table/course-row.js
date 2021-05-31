@@ -15,13 +15,7 @@ const CourseRow = (
 
     const [editing, setEditing] = useState(false)
     const [newTitle, setNewTitle] = useState(title)
-
-
-    console.log(" Title now -> " + newTitle);
-
     const saveTitle = () => {
-
-        console.log(" Save Title Called  with title !!!!" + newTitle);
         setEditing(false)
         const newCourse = {
             ...course,
@@ -32,7 +26,6 @@ const CourseRow = (
 
     const deleteTitle = () => {
         setEditing(false)
-
         deleteCourse(course)
     }
 

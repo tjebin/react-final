@@ -9,31 +9,21 @@ import { Link } from "react-router-dom";
 const TopicPills = (
     {
         topics = [],
+        lessons = [],
         findTopicsForLesson,
         createTopicForLesson,
         deleteTopic,
         updateTopic,
         resetTopic
     }) => {
-    const places_image = {
-        height: 200,
-        width: 300
-    };
-    const { layoutId, courseId, moduleId, lessonId, topicId } = useParams();
 
-    const call = () => {
-        console.log("topic - pill  executed !!!!" + lessonId);
-    }
-    call();
+    const { layoutId, courseId, moduleId, lessonId, topicId } = useParams();
     useEffect(() => {
         console.log("LOAD TOPICS FOR LESSON: " + lessonId)
         if (moduleId !== "undefined" && typeof moduleId !== "undefined"
             && lessonId !== "undefined" && typeof lessonId !== "undefined") {
-
-            //alert("1");
             findTopicsForLesson(lessonId)
         } else {
-            // alert("2");
             resetTopic()
         }
     }, [moduleId, lessonId])
@@ -41,8 +31,16 @@ const TopicPills = (
         <div className="background-color-blue" >
             { moduleId && lessonId &&
                 <div>
-                    <h6 class="bg-danger text-white">Fabrics Available for color {lessonId}</h6>
-
+                    <h6 class="bg-info "> <span class="bg-primary text-light font-weight-bold">Fabrics Available for color -
+                    {
+                            lessons.map(lesson =>
+                                <>
+                                    {lesson._id === lessonId ? ' ' + lesson.title : ''}
+                                </>
+                            )
+                        }
+                    </span>
+                    </h6>
                     <ul className="nav nav-pills">
                         {
                             topics.map(topic =>
@@ -69,7 +67,8 @@ const TopicPills = (
 }
 
 const stpm = (state) => ({
-    topics: state.topicReducer.topics
+    topics: state.topicReducer.topics,
+    lessons: state.lessonReducer.lessons
 })
 const dtpm = (dispatch) => ({
     findTopicsForLesson: (lessonId) => {

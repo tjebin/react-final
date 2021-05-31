@@ -10,7 +10,7 @@ const WIDGETS_URL = process.env.REACT_APP_WIDGET_URL;
 export const createWidgetForTopic = (topicId, type, size, text) =>
     fetch(`${TOPICS_URL}/${topicId}/widgets`, {
         method: "POST",
-        body: JSON.stringify({type: "HEADING", size: 1, text: "New Widget"}),
+        body: JSON.stringify({ type: "HEADING", size: 1, text: "New Widget" }),
         headers: {
             'content-type': 'application/json'
         }
@@ -18,6 +18,7 @@ export const createWidgetForTopic = (topicId, type, size, text) =>
         .then(response => response.json())
 
 export const findWidgetsForTopic = (topicId) =>
+
     fetch(`${TOPICS_URL}/${topicId}/widgets`)
         .then(response => response.json())
 

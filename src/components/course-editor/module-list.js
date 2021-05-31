@@ -12,16 +12,13 @@ const ModuleList = (
         updateModule,
         findModulesForCourse = (courseId) => console.log(courseId),
         resetTopic,
-        resetLesson,
-        topics = []
+        resetLesson
     }) => {
     const { layoutId, courseId, moduleId, lessionId } = useParams();
     const [value, setValue] = useState('initial');
     useEffect(() => {
-        //console.log(layoutId)
         resetLesson();
         resetTopic();
-        console.log(topics)
         findModulesForCourse(courseId)
     }, [value])
     return (
@@ -49,8 +46,7 @@ const ModuleList = (
 
 const stpm = (state) => {
     return {
-        myModules: state.moduleReducer.modules,
-        topics: state.topicReducer.topics
+        myModules: state.moduleReducer.modules
     }
 }
 const dtpm = (dispatch) => {
@@ -68,7 +64,7 @@ const dtpm = (dispatch) => {
         },
 
         createModule: (courseId) => {
-            moduleService.createModuleForCourse(courseId, { title: "New Module" })
+            moduleService.createModuleForCourse(courseId, { title: "New Type" })
                 .then(theActualModule => dispatch({
                     type: "CREATE_MODULE",
                     module: theActualModule

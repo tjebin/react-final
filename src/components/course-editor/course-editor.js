@@ -19,18 +19,14 @@ const reducer = combineReducers({
     widgetReducer: widgetReducer
 })
 
-const store = createStore(reducer)
-
+const store = createStore(reducer);
 const CourseEditor = ({ history }) => {
     const { layoutId, courseId, moduleId, lessonId } = useParams();
     const [courseName, setCourseName] = useState("")
     courseService.findCourseById(courseId)
-        .then(status => setCourseName(status.title))
-
-    const call = () => {
-        console.log("Course editor is called with lessonId ......" + lessonId);
-    }
-    call();
+        .then(status => {
+            setCourseName(status.title)
+        })
     return (
         <Provider store={store}>
             <div>
@@ -38,7 +34,7 @@ const CourseEditor = ({ history }) => {
                     <Link to={`/courses/${layoutId}`}>
                         <i className="fas fa-times float-left"></i>
                     </Link>
-                    <span className="add-padding-left color-red">
+                    <span className="color-pink">
                         {courseName}
                     </span>
                 </h2>
