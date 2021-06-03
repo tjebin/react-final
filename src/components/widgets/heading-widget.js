@@ -7,12 +7,14 @@ const HeadingWidget = ({
     updateWidget,
     deleteWidget,
     newText, setNewText,
+    newText2, setNewText2,
     newSize, setNewSize,
     newType, setNewType,
     newOrder, setNewOrder,
     newUrl, setNewUrl,
     newWidth, setNewWidth,
-    newHeight, setNewHeight }) => {
+    newHeight, setNewHeight,
+    selectedFile, setSelectedFile }) => {
     const [headingType, setHeadingType] = useState(true);
     return (
         <>
@@ -35,7 +37,13 @@ const HeadingWidget = ({
                             <input
                                 value={newText}
                                 onChange={(event) => setNewText(event.target.value)}
+                                placeholder="please"
                                 className="form-control" />
+                            <textarea placeholder="Enter description and choose the font size"
+                                col={3} rows={3} value={newText2}
+                                onChange={(event) => setNewText2(event.target.value)}
+                                className="form-control">
+                            </textarea>
                             <select
                                 value={newSize}
                                 onChange={(event) => setNewSize(event.target.value)}
@@ -52,6 +60,7 @@ const HeadingWidget = ({
 
                     { !headingType && newType === "PARAGRAPH" &&
                         <textarea
+                            col={3} rows={3}
                             value={newText}
                             onChange={(event) => setNewText(event.target.value)}
                             className="form-control">
@@ -65,9 +74,16 @@ const HeadingWidget = ({
                                 onChange={(event) => { setNewOrder(event.target.checked); }} />
                             Ordered
                             <br />
+                            Heading..........
+                            <input
+                                value={newText2}
+                                onChange={(event) => setNewText2(event.target.value)}
+                                placeholder="Please give a title...."
+                                className="form-control" />
                             List Items
                             <textarea
                                 placeholder="Enter one list item per line"
+                                col={4}
                                 rows={10} value={newText}
                                 onChange={(event) => setNewText(event.target.value)}
                                 className="form-control">
@@ -78,12 +94,15 @@ const HeadingWidget = ({
                         <>
                             URL
                             <input
+                                type="file"
                                 placeholder="Image URL"
-                                value={newUrl}
+                                name="file"
                                 onChange={(event) => {
-                                    setNewUrl(event.target.value);
+                                    setNewUrl("/images/color/" + event.target.files[0].name);
                                     setNewWidth();
                                     setNewHeight();
+                                    // event.preventDefault();
+                                    setSelectedFile(event.target.files[0]);
                                 }}
                                 className="form-control" />
                              width
@@ -99,31 +118,19 @@ const HeadingWidget = ({
 
                         </>
                     }
-
-
-                    {/*<i onClick={() => deleteWidget(widget)}
-                        className="fas fa-2x fa-trash float-right"></i>*/}
                 </>
             }
             {
                 !editing &&
                 <>
-                    {widget.size == 1 && <h1>{widget.text}</h1>}
-                    {widget.size == 2 && <h2>{widget.text}</h2>}
-                    {widget.size == 3 && <h3>{widget.text}</h3>}
+                    {widget.size == 1 && <div><h1>{widget.text}</h1><br /><p>{widget.text2}</p></div>}
+                    {widget.size == 2 && <div><h1>{widget.text}</h1><br /><p>{widget.text2}</p></div>}
+                    {widget.size == 3 && <div><h1>{widget.text}</h1><br /><p>{widget.text2}</p></div>}
                     {widget.size == 4 && <h4>{widget.text}</h4>}
                     {widget.size == 5 && <h5>{widget.text}</h5>}
                     {widget.size == 6 && <h6>{widget.text}</h6>}
                 </>
             }
-
-
-
-
-
-
-
-
         </>
     )
 }

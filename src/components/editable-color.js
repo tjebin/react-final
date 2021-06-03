@@ -19,11 +19,6 @@ const EditableColor = (
 
     const [selectedFile, setSelectedFile] = useState("")
 
-    const call = () => {
-        alert("Me is called ......");
-    }
-
-    // call();
     const onFileChangeHandler = (e) => {
         e.preventDefault();
         setSelectedFile(e.target.files[0]);

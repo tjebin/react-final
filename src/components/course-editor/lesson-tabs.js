@@ -17,7 +17,6 @@ const LessonTabs = ({
 
 }) => {
     const { layoutId, courseId, moduleId, lessonId } = useParams();
-
     useEffect(() => {
         if (moduleId !== "undefined" && typeof moduleId !== "undefined") {
             findLessonsForModule(moduleId)
@@ -44,7 +43,6 @@ const LessonTabs = ({
                                     <EditableColor
                                         active={lesson._id === lessonId}
                                         to={`/courses/${layoutId}/editor/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
-
                                         item={lesson}
                                     />
                                 </li>
